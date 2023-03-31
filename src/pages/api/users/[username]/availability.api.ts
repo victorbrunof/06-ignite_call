@@ -31,7 +31,7 @@ export default async function handle(
   const isPastDate = referenceDate.endOf('day').isBefore(new Date());
 
   if (isPastDate) {
-    return res.json({ availability: [] });
+    return res.json({ possibleTimes: [], availableTimes: [] });
   }
 
   const userAvailability = await prisma.userTimeInterval.findFirst({
@@ -42,7 +42,7 @@ export default async function handle(
   });
 
   if (!userAvailability) {
-    return res.json({ teste: 'aqui', availability: [] });
+    return res.json({ possibleTimes: [], availableTimes: [] });
   }
 
   // eslint-disable-next-line camelcase
